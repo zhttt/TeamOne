@@ -116,6 +116,7 @@
     	<div class="about">
         	<div class="font16 abtitle">关于我们</div>
             <ul class="gray">
+<<<<<<< HEAD
                 <li>开发一组</li>
                 <li>是</li>
                 <li>无敌的</li>
@@ -127,6 +128,19 @@
                 <li>组长：赵航天</li>
                 <li>组员：刘新，小波，王博</li>
                 <li>组员；马楠，郭宽宽，杨强</li>
+=======
+                <li>爱打折简介</li>
+                <li>联系我们</li>
+                <li>加入我们</li>
+            </ul>
+        </div>
+    	<div class="cooper">
+        	<div class="font16 abtitle">关于我们</div>
+            <ul class="gray">
+                <li>爱打折简介</li>
+                <li>联系我们</li>
+                <li>加入我们</li>
+>>>>>>> origin/master
             </ul>    
         </div>
     	<div class="weixin">
