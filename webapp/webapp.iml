@@ -30,6 +30,7 @@
     <orderEntry type="module" module-name="util" />
     <orderEntry type="module" module-name="parent" />
     <orderEntry type="module" module-name="ht" />
+    <orderEntry type="module" module-name="cjb" />
     <orderEntry type="library" name="Maven: org.springframework:spring-test:4.0.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.5" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.0.2.RELEASE" level="project" />
