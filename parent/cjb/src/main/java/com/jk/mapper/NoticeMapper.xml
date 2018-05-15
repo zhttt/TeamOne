@@ -1,0 +1,70 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.dao.CjbNoticeDao">
+	<select id="querynotice" resultType="com.jk.bean.cjb.CjbNotice">
+
+        select * from t_notice where 1=1;
+
+    </select>
+    <insert id="addnotice" parameterType="com.jk.bean.cjb.CjbNotice">
+          insert into t_notice values(#{noticeid},#{noticename},#{noticedate},#{noticebulletin})
+    </insert>
+    <delete id="deletenotice" parameterType = "Integer">
+         delete from t_notice where noticeid=#{id}
+    </delete>
+    <select id="querytableid" resultType="com.jk.bean.cjb.CjbNotice" parameterType="Integer">
+    select * from t_notice where noticeid=#{id}
+    </select>
+    <update id="updatetable" parameterType="com.jk.bean.cjb.CjbNotice">
+        update t_notice set noticename=#{noticename}
+        ,noticedate=#{noticedate}
+        ,noticebulletin = #{noticebulletin}
+        where noticeid=#{noticeid}
+    </update>
+
+
+<!-- <select id="getTotalCount" resultType="java.lang.Integer" parameterType="com.bo.vo.Animal">
+	select count(1) from t_animal where 1=1 
+    <if test="animalName != null and animalName !=''">
+     and animalName like concat(concat('%',#{animalName}),'%')
+    </if>
+</select>
+ <select id="getTotalCount" resultType="java.lang.Integer" parameterType=com.bo.vo.Animal>
+   select count(1) from t_animal where 1=1 
+    <if test="animalName != null and animalName !=''">
+     and animalName like concat(concat('%',#{animalName}),'%')
+    </if>
+ </select>
+ <select id="queryPbgs" parameterType="java.util.Map" resultType="com.bo.vo.Animal">
+   select * from 
+			(select t.*,rownum rn from 
+			        (select p.*,r.propname from t_animal p,animalType r
+			            where p.animalTypeId=r.animalTypeId
+			                <if test="q.animalName != null and q.animalName !=''">
+							 and animalName like concat(concat('%',#{q.animalName}),'%')
+							</if>
+			            ) t
+			         where rownum &lt;= #{pager.endIndex} )
+			where rn &gt;= #{pager.startIndex} 
+ </select>
+ <select id="queryProp" resultType="com.bo.vo.Animal">
+   select * from t_animal
+ </select>
+ <insert id="savePbgs" parameterType="com.bo.vo.Animal">
+  <selectKey keyProperty="playerid" resultType="string" order="BEFORE">
+	    select lower(sys_guid()) from dual
+  </selectKey> 
+  insert into t_animal values(#{animalId},#{animalName },#{animalTypeId},#{animalColor})
+ </insert>
+ <select id="queryPbgsById" parameterType="string" resultType="com.bo.vo.Animal">
+  select * from t_animal where animalId  = #{animalId }
+ </select>
+ <update id="updatePbgs" parameterType="com.bo.vo.Animal">
+	update t_animal set animalName=#{animalName}
+							,animalColor=#{animalColor}
+							 where animalTypeId=#{animalTypeId}
+ </update>
+ <delete id="deletePbgs" parameterType="string">
+  delete t_animal where animalTypeId=#{animalTypeId}
+ </delete> -->
+</mapper>

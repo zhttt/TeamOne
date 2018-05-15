@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.OrderDao" >
+
+    <resultMap type="com.jk.bean.yq.Orders" id="order">
+        <id column="ordersid" property="ordersid"/>
+        <result column="orderscode" property="orderscode"/>
+        <result column="orderscreattime" property="orderscreattime"/>
+        <result column="ordersmoney" property="ordersmoney"/>
+        <result column="ordersproduct" property="ordersproduct"/>
+        <result column="orderspronum" property="orderspronum"/>
+        <result column="ordersstatus" property="ordersstatus"/>
+        <result column="ordersuser" property="ordersuser"/>
+        <result column="page" property="page"/>
+        <result column="rows" property="rows"/>
+        <result column="userid" property="userid"/>
+        <result column="ordersupdatadata" property="ordersupdatadata"/>
+        <result column="guestbookid" property="guestbookid"/>
+        <result column="gmassage" property="gmassage"/>
+    </resultMap>
+    <select id="yqqueryOrder" resultMap="order">
+        select * from  orders
+    </select>
+    <select id="getqueryByPage" resultMap="order">
+        select * from orders
+        WHERE 1=1
+        limit #{begin},#{end}
+    </select>
+    <delete id="deleteOrder" >
+        delete from orders where ordersid in (${ids})
+    </delete>
+    <insert id="addorder" parameterType="com.jk.bean.yq.Orders">
+        INSERT INTO  orders  VALUES (
+        ordersid,
+        #{orderscode},
+        #{orderscreattime},
+        #{ordersmoney},
+        #{ordersproduct},
+        #{orderspronum},
+        #{ordersstatus},
+        #{ordersuser},
+        #{page},
+        #{rows},
+        #{userid},
+        #{ordersupdatadata},
+        #{guestbookid},
+        #{gmassage}
+        );
+    </insert>
+    <insert id="addguestbook" parameterType="com.jk.bean.yq.Guestbook">
+        INSERT INTO  t_guestbook  VALUES (
+        gid,
+        #{gusername},
+        #{gmassage},
+        #{gcreateTime},
+        greturnMassage,
+        greturnTime,
+        #{gstatus},
+        glastUpdTime,
+        greturnPeople
+        );
+    </insert>
+    <select id="queryUpdateOrder" resultMap="order">
+        SELECT ord.*,gk.gcreatetime,gk.gusername FROM orders ord LEFT JOIN t_guestbook gk ON  ord.guestbookid=gk.gid
+        WHERE ord.ordersid=#{ids};
+    </select>
+    <update id="updateGuestbook" parameterType="com.jk.bean.yq.Guestbook">
+        update t_guestbook  set
+        gmassage = #{gmassage}
+        where gid = #{gid}
+
+    </update>
+    <update id="updateorder" parameterType="com.jk.bean.yq.Orders">
+        update orders sord set
+        sord.orderscode = #{orderscode},
+        sord.orderscreattime = #{orderscreattime},
+        sord.ordersmoney = #{ordersmoney},
+        sord.ordersproduct = #{ordersproduct},
+        sord.orderspronum = #{orderspronum},
+        sord.ordersstatus = #{ordersstatus},
+        sord.ordersuser = #{ordersuser},
+        sord.page = #{page},
+        sord.rows = #{rows},
+        sord.userid = #{userid},
+        sord.ordersupdatadata = #{ordersupdatadata},
+        sord.guestbookid = #{guestbookid},
+        sord.gmassage = #{gmassage}
+        where sord.ordersid = #{ordersid}
+    </update>
+    <update id="updateordersstatus" parameterType="com.jk.bean.yq.Orders">
+        update orders  set
+        ordersstatus = #{ordersstatus}
+        where ordersid = #{ordersid}
+
+    </update>
+</mapper>

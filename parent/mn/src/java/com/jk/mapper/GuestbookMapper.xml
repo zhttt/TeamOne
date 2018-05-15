@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.GuestbookDao" >
+
+	<select id="queryGuestbook" resultType="java.util.Map">
+		SELECT
+		  `gid`,
+		  `gusername`,
+		  `gmassage`,
+		  `gcreateTime`,
+		  `greturnMassage`,
+		  `greturnTime`,
+		  `gstatus`,
+		  `glastUpdTime`,
+		  `greturnPeople`
+		FROM `online`.`t_guestbook`
+		WHERE 1=1
+
+		<if test="guestbook.gstatus!=null and guestbook.gstatus!=-1">
+			AND gstatus = #{guestbook.gstatus}
+		</if>
+		LIMIT #{page}, #{rows};
+	</select>
+
+	<select id="queryTotal" resultType="java.lang.Integer">
+		select count(1) from t_guestbook
+		WHERE 1=1
+		<if test="guestbook.gstatus!=null and guestbook.gstatus!=-1">
+			AND gstatus = #{guestbook.gstatus}
+		</if>
+	</select>
+
+	<select id="queryGuestById" resultType="com.jk.bean.mn.Guestbook">
+		select * from t_guestbook where gid = #{gid}
+	</select>
+	<!--
+	<insert id="addShoe" >
+		insert into t_shoe (shoeid , shoeBrand,
+		shoePrice,
+		shoeType,
+		shoeImg,
+		shoeDescription)
+		values((select lower(sys_guid()) from dual),
+		#{shoeBrand},
+		#{shoePrice},
+		#{shoeType},
+		#{shoeImg},
+		#{shoeDescription}
+		)
+	</insert>	
+	-->
+
+	
+	<update id="updateGuestbook">
+		update t_guestbook set
+			gusername=#{guestbook.gusername},
+			gmassage=#{guestbook.gmassage},
+			gcreateTime=#{guestbook.gcreateTime},
+			greturnMassage=#{guestbook.greturnMassage},
+		    greturnTime=#{guestbook.greturnTime},
+			gstatus=1,
+			glastUpdTime=#{guestbook.glastUpdTime},
+			greturnPeople=#{guestbook.greturnPeople}
+		 where gid = #{guestbook.gid}
+	</update>
+
+	<delete id="deleteGuestbook"  parameterType="java.util.List">
+		delete from t_guestbook where  gid in
+		<foreach collection="list" item="item" open="(" separator=","  close=")">
+  			'${item}'
+  		</foreach>
+  	
+	</delete>
+	
+</mapper>
