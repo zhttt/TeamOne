@@ -15,7 +15,7 @@
     
    	 <!--静态文件访问,主要是让DispatcherServlet不拦截以下静态资源 -->
 	<mvc:resources location="/css/" mapping="/css/**"/>
-	<mvc:resources location="/images/" mapping="/images/**"/>
+	<mvc:resources location="/image/" mapping="/image/**"/>
 	<mvc:resources location="/js/" mapping="/js/**"/>
     <!-- 这两个类用来启动基于Spring MVC的注解功能，将控制器与方法映射加入到容器中 -->
   	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
@@ -56,7 +56,7 @@
  	<!--  <mvc:interceptors> 
           <mvc:interceptor> 
  	        <mvc:mapping path="/**" /> 
- 	        <mvc:exclude-mapping path="/login.jsp"/> 
+ 	        <mvc:exclude-mapping path="/loginq.jsp"/>
  	        <mvc:exclude-mapping path="/js/**"/>
  	        <mvc:exclude-mapping path="/css/**"/> 
  	        <mvc:exclude-mapping path="/jsp/**"/> 
