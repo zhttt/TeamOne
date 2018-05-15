@@ -30,45 +30,26 @@
     <a href="javascript:yqupdate()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改</a>
     <a href="javascript:shangg()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
     <a href="javascript:dely(null)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
-    <a href="javascript:updateordersstatus()" class="easyui-linkbutton" data-options="iconCls:'icon-mini-add',plain:true">提交订单</a>
+    <a href="javascript:updateordersstatus()" class="easyui-linkbutton" data-options="iconCls:'icon-timg',plain:true">提交订单</a>
     <a href="javascript:excel()" class="easyui-linkbutton" data-options="iconCls:'icon-excel',plain:true">Excel导出</a>
 </div>
 <div id="shangping"></div>
 
 <script type="text/javascript">
-   /* $("#y_goods").datagrid({
-        pagination: true,
-        fit:true,
 
-        url:'/order!queryOrder.action',
-        columns:[[
-            {field:'x',title:'',checkbox:true},
-            {field:'ordersid',title:'id',width:100,align:'center'},
-            {field:'orderscode',title:'订单编号',width:100,align:'center'},
-            {field:'orderscreattime',title:'创建时间',width:100,align:'center'},
-            {field:'ordersmoney',title:'总钱数',width:100,align:'center'},
-            {field:'ordersproduct',title:'订单的产品',width:100,align:'center'},
-            {field:'orderspronum',title:'订单中的产品的数量',width:100,align:'center'},
-            {field:'ordersstatus',title:'订单状态',width:100,align:'center'},
-            {field:'ordersuser',title:'订单人id',width:100,align:'center'},
-            {field:'ordersupdatadata',title:'修改时间',width:100,align:'center'}
-        ]],
-
-        toolbar:'#y_ta'
-    });*/
 
     //查询
     $('#y_goods').datagrid({
         url:'<%=request.getContextPath()%>/yqorder/queryOrder',
         columns:[[
             {field:'',title:'',checkbox:true},
-            {field:'ordersid',title:'id',width:100 },
-            {field:'orderscode',title:'订单编号 ',width:100 },
-            {field:'orderscreattime',title:'创建时间',width:100 },
-            {field:'ordersmoney',title:' 总钱数 ',width:100 },
-            {field:'ordersproduct',title:'订单的产品',width:100 },
-            {field:'orderspronum',title:'订单中的产品的数量',width:100 },
-            {field:'ordersstatus',title:'订单状态 ',width:100 ,formatter:function(value,row,index){
+            {field:'ordersid',title:'id',width:120 },
+            {field:'orderscode',title:'订单编号 ',width:120 },
+            {field:'orderscreattime',title:'创建时间',width:120 },
+            {field:'ordersmoney',title:' 总钱数 ',width:120 },
+            {field:'ordersproduct',title:'订单的产品',width:120 },
+            {field:'orderspronum',title:'订单中的产品的数量',width:167 },
+            {field:'ordersstatus',title:'订单状态 ',width:120 ,formatter:function(value,row,index){
                     if(value==1){
                         aa="<font color=''>以发货</font>";
                     }else if(value==2){
@@ -77,8 +58,8 @@
                       return aa;
                      }
                  },
-            {field:'ordersuser',title:'订单人id ',width:100 },
-            {field:'ordersupdatadata',title:'修改时间',width:100
+            {field:'ordersuser',title:'订单人id ',width:120 },
+            {field:'ordersupdatadata',title:'修改时间',width:120
                 }
         ]],
         fit:true,
@@ -157,7 +138,7 @@
             alert("只能选择一条数据");
         }else{
             var ids="";
-            var name=""
+            var name="";
             var arr = $("#y_goods").datagrid("getSelections");
             for (var i = 0; i < arr.length; i++) {
                 ids+=","+arr[i].ordersid;
@@ -245,24 +226,6 @@
 <script type="text/javascript" >
     function excel(){
         location.href="<%=request.getContextPath()%>/yqorder/excelOrder";
-        /*
-        alert(11)
-
-        $.ajax({
-            url:"/yqorder/excelOrder",
-            type:"post",
-            dataType:"json",
-            async:false,
-            success:function(data){
-                alert(2222)
-                alert(data)
-                if(data.success){
-                    $('#y_goods').datagrid('load');
-                }else{
-                    $.messager.alert("导出失败！");
-                }
-            }
-        })*/
     }
 
 </script>

@@ -35,7 +35,7 @@ public class ExportExcel {
       
     private List<Object[]>  dataList = new ArrayList<Object[]>();  
       
-    HttpServletResponse  response;  
+    HttpServletResponse  response;
       
     //构造方法，传入要导出的数据  
     public ExportExcel(String title,String[] rowName,List<Object[]>  dataList, HttpServletResponse response){  

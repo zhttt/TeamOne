@@ -96,6 +96,15 @@ public class OrderController {
     @RequestMapping("queryUpdateOrder")
     @ResponseBody
     public ModelAndView queryUpdateOrder(String ids){
+        /**
+         *
+         * 功能描述: 修改的查询
+         *
+         * @param: [ids]
+         * @return: org.springframework.web.servlet.ModelAndView
+         * @auther: 杨强
+         * @date: 2018/5/15 17:28
+         */
         ModelAndView mav=new ModelAndView("/yqaddorder");
         Orders orders=orderService.queryUpdateOrder(ids);
         mav.addObject("aa",orders);
@@ -104,6 +113,15 @@ public class OrderController {
     @RequestMapping("updateordersstatus")
     @ResponseBody
     public Map<String,Object> updateordersstatus(Orders orders){
+        /**
+         *
+         * 功能描述: 提交订单
+         *
+         * @param: [orders]
+         * @return: java.util.Map<java.lang.String,java.lang.Object>
+         * @auther: 杨强
+         * @date: 2018/5/15 17:28
+         */
         Map<String,Object> map=new HashMap<String, Object>();
         orders.setOrdersstatus(1);
         orderService.updateordersstatus(orders);
@@ -112,8 +130,16 @@ public class OrderController {
     }
     @RequestMapping("excelOrder")
     @ResponseBody
-    public Map<String,Object> excelOrder(HttpServletResponse response,HttpServletRequest request) {
-        Map<String,Object> map1=new HashMap<String, Object>();
+    public void excelOrder(HttpServletResponse response,HttpServletRequest request) {
+/**
+ *
+ * 功能描述: excel导出
+ *
+ * @param: [response, request]
+ * @return: void
+ * @auther: 杨强
+ * @date: 2018/5/15 17:27
+ */
         List list=orderService.yqqueryOrder(); //  查询数据
         //  设置标头
         String [ ] rowName={"id","订单编号","创建时间","总钱数","订单的产品","订单中的产品数量","订单状态","订单人id","修改时间"};
@@ -146,7 +172,5 @@ public class OrderController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        map1.put("success", true);
-        return map1;
     }
 }
