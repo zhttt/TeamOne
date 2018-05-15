@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.BatchDao" >
+
+    <!-- 查询批次 -->
+    <select id="selectBatch" resultType="com.jk.bean.gkk.Batch">
+        select * from  t_batch
+    </select>
+
+    <!-- 新增批次 -->
+    <insert id="addBatch" parameterType="com.jk.bean.gkk.Batch">
+        insert into t_batch
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+
+            <if test="name != null and name !=''">
+                name,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="name != null and name !=''">
+                #{name},
+            </if>
+
+        </trim>
+    </insert>
+
+    <!-- 单删批次 -->
+    <delete id="deleteBatch" parameterType="java.lang.Integer">
+        delete from  t_batch  where  id = #{id}
+    </delete>
+
+    <!-- 修改之保存-->
+    <update id="updateBatch"  parameterType="com.jk.bean.gkk.Batch">
+        update t_batch
+        <set>
+            <if test="name != null and name !=''">
+                name=#{name},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+
+</mapper>

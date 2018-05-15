@@ -15,7 +15,11 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/js/jquery-easyui/themes/icon.css"/>
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/artDialog-master/dist/dialog-plus.js"></script>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/normalize.css" />
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/demo.css" />
+=======
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/demo.css"/>
+>>>>>>> origin/master
     <!--必要样式-->
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/component.css" />
 
@@ -58,7 +62,11 @@
         var names = $("#username").val();
         var pass = $("#password").val();
             $.ajax({
+<<<<<<< HEAD
                 url:"<%=request.getContextPath()%>/UserController/queryuser",
+=======
+                url:"<%=request.getContextPath()%>/LxController/queryuser",
+>>>>>>> origin/master
                 type:"post",
                 data:{"username":names,"password":pass},
                 dataType:'text',

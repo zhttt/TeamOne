@@ -43,15 +43,15 @@
         </param-value>
     </context-param>
     <!-- 验证码 -->
- <!--     <servlet>
+      <servlet>
     	<servlet-name>AuthImage</servlet-name>
     	<servlet-class>com.jk.util.AuthImage</servlet-class>
-    </servlet>-->
-   <!--
+    </servlet>
+    
     <servlet-mapping>
     	<servlet-name>AuthImage</servlet-name>
     	<url-pattern>/authImage</url-pattern>
-    </servlet-mapping>-->
+    </servlet-mapping>
     <servlet-mapping>
      <servlet-name>default</servlet-name>
      <url-pattern>*.js</url-pattern>
@@ -59,6 +59,6 @@
   <display-name>ssm-nba-manage</display-name>
   <welcome-file-list>
     
-    <welcome-file>login.jsp</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

@@ -8,6 +8,13 @@
 <title>会员中心</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-3.2.1.js"></script>
+>>>>>>> origin/master
+>>>>>>> origin/master
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <link href="css/member.css" rel="stylesheet" type="text/css" />
 <script src="js/jquery.min.js" type="text/javascript"></script>
@@ -66,7 +73,15 @@
 	<div class="banner">
 		<div class="userface fl"><img src="image/member/userface.png"></div>
 		<div class="userinfo fl">
+<<<<<<< HEAD
 			<div><h2>honey娟</h2><a href="#"/>设置</a></div>
+=======
+<<<<<<< HEAD
+			<div><h2>honey娟</h2><a href="#"/>设置</a></div>
+=======
+			<div><h2>honey娟</h2><a href="#">设置 </a> </div>
+>>>>>>> origin/master
+>>>>>>> origin/master
 			<div class="font14 grayer">
 				<span>女</span><span class="mline m0m15"></span>
 				<span>天蝎座</span><span class="mline m0m15"></span><span>四川-成都</span>
@@ -301,5 +316,28 @@
         $(".column .colwrap").hide().eq($(this).index()).show();
     });
 </script>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<script type="text/javascript">
+$.ajax({
+    url:"<%=request.getContextPath()%>/yqhuiyuan/queryshop",
+    type:"post",
+    dataType: "json",
+    success: function (data) {
+
+        if (data.success) {
+            $('#y_goods').datagrid('load');
+        } else {
+            $.messager.alert("删除失败！");
+        }
+    }
+})
+
+})
+</script>
+>>>>>>> origin/master
+>>>>>>> origin/master
 </body>
 </html>
