@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.ShopDao" >
+
+	<select id="queryShop" resultType="java.util.Map">
+		SELECT
+		s.`id`,
+		s.`image`,
+		s.`sname`,
+		s.`price`,
+		s.`kuncun`,
+		s.`xiaoid`,
+		s.`daid`,
+		s.`rid`,
+		s.`tid`,
+		s.`pasttime`,
+		s.`pcid`,
+		s.`zhekou`,
+		s.`kucun`,
+		s.`zhehouprice`,
+		b.`name`
+		FROM `online`.`t_shop` s
+		, t_batch b
+		WHERE s.`pcid`=b.`id`
+
+		<!--	WHERE 1=1
+
+            <if test="guestbook.gstatus!=null and guestbook.gstatus!=-1">
+                AND gstatus = #{guestbook.gstatus}
+            </if>-->
+		LIMIT #{page}, #{rows};
+	</select>
+
+	<select id="getTotal" resultType="java.lang.Integer">
+		select count(1) from t_shop
+		<!--	WHERE 1=1
+            <if test="guestbook.gstatus!=null and guestbook.gstatus!=-1">
+                AND gstatus = #{guestbook.gstatus}
+            </if>-->
+	</select>
+	<select id="queryDalei" resultType="java.util.Map">
+		select * from t_shopdalei
+	</select>
+	<select id="queryXiaolei" resultType="java.util.Map">
+		select * from t_shopxiaolei WHERE daid=#{id}
+	</select>
+
+	<select id="queryPici" resultType="java.util.Map">
+		select * from t_batch
+	</select>
+
+	<insert id="addShop" >
+		INSERT INTO `online`.`t_shop`
+            (`id`,
+             `image`,
+             `sname`,
+             `price`,
+             `xiaoid`,
+             `daid`,
+             `rid`,
+             `tid`,
+             `pasttime`,
+             `pcid`,
+             `zhekou`,
+             `kucun`,
+             `zhehouprice`)
+	VALUES (
+			#{id},
+			#{image},
+			#{sname},
+			#{price},
+			#{xiaoid},
+			#{daid},
+			#{rid},
+			#{tid},
+			#{pasttime},
+			#{pcid},
+			#{zhekou},
+			#{kucun},
+			#{zhehouprice});
+	</insert>
+
+
+	<delete id="deleteShop"  parameterType="java.util.List">
+		delete from t_shop where  id in
+		<foreach collection="list" item="item" open="(" separator=","  close=")">
+			'${item}'
+		</foreach>
+
+	</delete>
+
+        <select id="queryShopById" resultType="com.jk.bean.mn.Shop">
+            select * from t_shop where id = #{id}
+        </select>
+
+
+      <update id="updateShop">
+            update t_shop set
+                id=#{id},
+				image=#{image},
+				sname=#{sname},
+				price=#{price},
+				xiaoid=#{xiaoid},
+				daid=#{daid},
+				rid=#{rid},
+				tid=#{tid},
+				pasttime=#{pasttime},
+				pcid=#{pcid},
+				zhekou=#{zhekou},
+				kucun=#{kucun},
+				zhehouprice=#{zhehouprice}
+				WHERE id=#{id}
+        </update>
+
+
+</mapper>
