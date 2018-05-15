@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.ShopDao" >
+
+    <!-- 查询大类 -->
+    <select id="queryshopdalei" resultType="com.jk.bean.gkk.TShopdalei">
+        select * from  t_shopdalei
+    </select>
+
+    <!--  新增商品大类 -->
+    <insert id="addshopdalei" parameterType="com.jk.bean.gkk.TShopdalei">
+          INSERT INTO `online`.`t_shopdalei`
+            (
+             `name`,
+             `notes`
+             )
+     VALUES (
+        #{name},
+        #{notes}
+        )
+     </insert>
+
+    <!--单删商品大类 -->
+    <delete id="deleteshopdaleibyid" parameterType="java.lang.Integer">
+        delete from  t_shopdalei  where  id = #{id}
+    </delete>
+
+
+    <!--修改之保存商品大类-->
+     <update id="selectshopdaleibyid"  parameterType="com.jk.bean.gkk.TShopdalei">
+       update t_shopdalei
+         <set>
+             <if test="name != null and name !=''">
+                 name=#{name},
+             </if>
+             <if test="notes != null and notes !=''">
+                 notes=#{notes},
+             </if>
+         </set>
+         where id=#{id}
+        <!--UPDATE online.t_shopdalei
+         SET name=#{name},
+          notes=#{notes}
+         WHERE  id=#{id};-->
+     </update>
+
+    <!-- 查询小类 -->
+    <select id="selectshopxiaolei" resultType="com.jk.bean.gkk.TShopxiaolei">
+        select * from  t_shopxiaolei
+    </select>
+
+    <!--  新增商品小类 -->
+    <insert id="addshopxiaolei" parameterType="com.jk.bean.gkk.TShopxiaolei">
+        INSERT INTO `online`.`t_shopxiaolei`
+        (
+        `name`,
+        `daid`,
+        `daname`,
+        `notes`
+        )
+        VALUES (
+        #{name},
+        #{daid},
+        #{daname},
+        #{notes}
+        )
+    </insert>
+
+    <!--单删商品小类 -->
+    <delete id="deleteshopxiaoleibyid" parameterType="java.lang.Integer">
+        delete from  t_shopxiaolei  where  id = #{id}
+    </delete>
+
+    <!--修改之保存商品小类-->
+    <update id="selectshopxiaoleibyid"  parameterType="com.jk.bean.gkk.TShopxiaolei">
+        update t_shopxiaolei
+        <set>
+            <if test="name != null and name !=''">
+                name=#{name},
+            </if>
+            <if test="daid != null and daid !=''">
+                daid=#{daid},
+            </if>
+            <if test="daname != null and daname !=''">
+                daname=#{daname},
+            </if>
+            <if test="notes != null and notes !=''">
+                notes=#{notes},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+</mapper>

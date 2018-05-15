@@ -13,7 +13,7 @@ public class UserServiceImpl implements IUserService {
     @Resource
     private IUserDao userDao;
 
-    @Override
+
     public List getTree() {
         return userDao.getTree();
     }
