@@ -16,6 +16,9 @@
           <element id="archive" name="ht-1.0-SNAPSHOT.jar">
             <element id="module-output" name="ht" />
           </element>
+          <element id="archive" name="lx-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="lx" />
+          </element>
           <element id="library" level="project" name="Maven: org.springframework:spring-test:4.0.2.RELEASE" />
           <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.5" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.0.2.RELEASE" />
