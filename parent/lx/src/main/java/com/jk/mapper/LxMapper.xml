@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.ILxDao" >
+    <resultMap type="com.jk.bean.lx.Echarts" id="BaseResultMap" >
+        <id column="ordersid" property="id" jdbcType="INTEGER" />
+        <result column="ordersproduct" property="name" jdbcType="VARCHAR" />
+        <result column="ordersmoney" property="y" jdbcType="DOUBLE" />
+    </resultMap>
+
+    <resultMap type="com.jk.bean.lx.Echarts" id="echarts" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="y" property="y" jdbcType="DOUBLE" />
+    </resultMap>
+
+    <resultMap type="com.jk.bean.lx.User" id="User">
+        <id property="id" column="u_id"/>
+        <result property="username" column="u_username"/>
+        <result property="password" column="u_password"/>
+        <result property="realname" column="u_realname"/>
+        <result property="sex" column="u_sex"/>
+        <result property="birthday" column="u_birthday"/>
+        <result property="idcard" column="u_idcard"/>
+        <result property="mail" column="u_mail"/>
+        <result property="phone" column="u_phone"/>
+        <result property="r_name" column="r_name"/>
+    </resultMap>
+
+    <select id="selectUSerCount" resultMap="User">
+    select * from user where u_username = #{username} and u_password =#{password}
+   </select>
+
+    <select id="echarts" resultType="com.jk.bean.lx.Echarts">
+          select ordersid id ,ordersproduct name,ordersmoney y from orders
+    </select>
+
+    <update id="updateuser">
+
+
+            UPDATE `online`.`user`
+SET
+  `u_password` = #{password}
+  WHERE
+ `u_id` = #{uname}
+    </update>
+</mapper>

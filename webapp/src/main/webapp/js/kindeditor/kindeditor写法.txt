@@ -1,0 +1,49 @@
+﻿引入js
+<link rel="stylesheet" href="kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="kindeditor/plugins/code/prettify.css" />
+<script charset="utf-8" src="kindeditor/kindeditor-all-min.js"></script>
+<script charset="utf-8" src="kindeditor/lang/zh-CN.js"></script>
+<script charset="utf-8" src="kindeditor/plugins/code/prettify.js"></script>
+
+1、   	初始化(页面刷新绑定kindeditor)
+	var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="intro"]', {
+			uploadJson: "<%=request.getContextPath()%>/kindeditor/jsp/upload_json.jsp",
+			fileManagerJson: "<%=request.getContextPath()%>/kindeditor/jsp/file_manager_json.jsp",
+			allowFileManager : true,
+			//将富文本编辑中的内容同步到表单序列化中
+			afterBlur:function(){this.sync();}
+		});
+	});
+	
+2、	当添加数据需要弹框显示kindeditor的写法(需要写在触发添加的方法里)
+	KindEditor.remove('#add textarea[name="t_giftdes"]');
+	$.getScript('kindeditor/kindeditor-all-min.js', function() {
+		KindEditor.basePath = '<%=request.getContextPath()%>/kindeditor/';
+		var editor = KindEditor.create('#add textarea[name="t_giftdes"]', {
+			cssPath : 'kindeditor/plugins/code/prettify.css',
+			uploadJson : 'kindeditor/jsp/upload_json.jsp',
+			fileManagerJson : 'kindeditor/jsp/file_manager_json.jsp',
+			allowFileManager : true,
+			afterBlur:function(){this.sync();}
+		});
+		prettyPrint();
+	});
+	
+3、 	修改回显需要弹框显示kindeditor的写法(需要写在触发修改的方法里)
+	KindEditor.remove('#add textarea[name="t_giftdes"]');
+	$.getScript('kindeditor/kindeditor-all-min.js', function() {
+		KindEditor.basePath = '<%=request.getContextPath()%>/kindeditor/';
+		var editor = KindEditor.create('#add textarea[name="t_giftdes"]', {
+			cssPath : 'kindeditor/plugins/code/prettify.css',
+			uploadJson : 'kindeditor/jsp/upload_json.jsp',
+			fileManagerJson : 'kindeditor/jsp/file_manager_json.jsp',
+			allowFileManager : true,
+			afterBlur:function(){this.sync();}
+		});
+		prettyPrint();
+		editor.html(你从数据库查到的需要回显的值);
+		//需要把修改之后的内容继续同步到表单内
+		editor.sync();
+	});

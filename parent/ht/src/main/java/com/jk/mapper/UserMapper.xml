@@ -2,8 +2,218 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jk.dao.IUserDao" >
 
-    <select id="getTree" resultType="com.jk.bean.ht.Tree">
-        select * from  power
+    <resultMap type="com.jk.bean.ht.User" id="User">
+        <id property="id" column="u_id"/>
+        <result property="username" column="u_username"/>
+        <result property="password" column="u_password"/>
+        <result property="realname" column="u_realname"/>
+        <result property="sex" column="u_sex"/>
+        <result property="birthday" column="u_birthday"/>
+        <result property="idcard" column="u_idcard"/>
+        <result property="mail" column="u_mail"/>
+        <result property="phone" column="u_phone"/>
+        <result property="r_name" column="r_name"/>
+    </resultMap>
+
+   <!--查询树-->
+    <select id="getTree"  parameterType="java.lang.Integer" resultType="com.jk.bean.ht.Tree">
+         SELECT t5.* FROM  user t1, user_role t2, role t3, role_power t4,POWER t5
+                WHERE t1.u_id=t2.u_id
+                AND t2.r_id = t3.r_id
+                AND t3.r_id=t4.r_id
+                AND t4.p_id = t5.id
+                AND t1.u_id = #{id};
     </select>
-   
+
+    <!--查询用户-->
+    <select id="queryUser" resultMap="User">
+          SELECT
+          `u_id`,
+          `u_password`,
+          `u_username`,
+          `u_realname`,
+          `u_sex`,
+          `u_birthday`,
+          `u_idcard`,
+          `u_mail`,
+          `u_phone`,
+          `u_address`
+        FROM `online`.`user`
+    </select>
+    <!--登录-->
+    <select id="selectUSerCount" resultMap="User">
+        select * from user where u_username = #{username} and u_password =#{password}
+    </select>
+    <!--新增用户-->
+    <insert id="addUser" parameterType="com.jk.bean.ht.User">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+
+            <if test="username != null and username !='' ">
+                u_username,
+            </if>
+            <if test="password != null and password !=''">
+                u_password,
+            </if>
+            <if test="realname != null and realname !=''">
+                u_realname,
+            </if>
+            <if test="sex != null and sex !=''">
+                u_sex,
+            </if>
+            <if test="birthday != null and birthday !=''">
+                u_birthday,
+            </if>
+            <if test="idcard != null and idcard !=''" >
+                u_idcard,
+            </if>
+            <if test="mail != null and mail !='' ">
+                u_mail,
+            </if>
+            <if test="phone != null and phone !=''">
+                u_phone,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="username != null and username !=''">
+                #{username},
+            </if>
+            <if test="password != null and password !=''">
+                #{password},
+            </if>
+            <if test="realname != null and realname !=''">
+                #{realname},
+            </if>
+            <if test="sex != null and sex !=''">
+                #{sex},
+            </if>
+            <if test="birthday != null and birthday !=''">
+                #{birthday},
+            </if>
+            <if test="idcard != null and idcard !=''">
+                #{idcard},
+            </if>
+            <if test="mail != null and mail !=''">
+                #{mail},
+            </if>
+            <if test="phone != null and phone !=''">
+                #{phone},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 批删-->
+    <delete id="deleteUsers" parameterType="java.util.List">
+        delete   from user
+        where u_id in
+        <foreach collection="list" item="item" open="(" separator=","  close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!-- 单删-->
+    <delete id="deleteUserById" parameterType="java.lang.Integer">
+       delete   from user  where u_id =#{id}
+    </delete>
+
+    <!-- 修改之查询-->
+    <select id="queryUserById"  parameterType="java.lang.Integer" resultMap="User">
+        select * from user where u_id =#{id}
+    </select>
+
+    <!-- 修改之保存-->
+    <update id="updateUser"  parameterType="com.jk.bean.ht.User">
+        update user
+        <set>
+            <if test="username != null and username !=''">
+                u_username=#{username},
+            </if>
+            <if test="password != null  and password !=''">
+                u_password=#{password},
+            </if>
+            <if test="realname != null  and realname !=''">
+                u_realname=#{realname},
+            </if>
+            <if test="sex != null  and sex !=''">
+                u_sex=#{sex},
+            </if>
+            <if test="idcard != null and idcard !=''">
+                u_idcard=#{idcard},
+            </if>
+            <if test="phone != null and phone !=''">
+                u_phone=#{phone},
+            </if>
+            <if test="birthday != null">
+                u_birthday=#{birthday},
+            </if>
+            <if test="u_address != null">
+                u_address=#{u_address},
+            </if>
+            <if test="mail != null">
+                u_mail=#{mail},
+            </if>
+        </set>
+        where u_id=#{id}
+    </update>
+    <!--查询所有用户-->
+    <select id="queryUserRole" resultMap="User">
+        select * from USER
+    </select>
+  <!--查询所有角色-->
+    <select id="queryRole" resultType="com.jk.bean.ht.Role">
+        select * from role
+    </select>
+
+    <!--根据用户查询角色-->
+    <select id="queryRolee" resultType="com.jk.bean.ht.Role">
+         SELECT t2.* FROM USER t1, user_role t2 ,role t3
+           WHERE t1.`u_id`=t2.`u_id`
+           AND t2.`r_id`=t3.`r_id`
+           AND t1.`u_id`=#{id}
+    </select>
+
+    <!--删除改用户角色-->
+    <delete id="deleteRole">
+        delete from user_role where u_id =#{uid}
+    </delete>
+
+
+    <!--修改用户角色-->
+    <insert id="updateRole">
+        insert into user_role (u_id,r_id) values
+        <foreach collection="r_id" item="rid"  separator=",">
+            (#{uid},#{rid})
+        </foreach>
+    </insert>
+
+    <!--查询用户拥有的权限-->
+    <select id="queryTreeByIds" resultType="com.jk.bean.ht.Tree">
+        SELECT t3.`id` FROM
+        role t1,role_power t2,POWER t3
+        WHERE t1.`r_id`=t2.`r_id`
+        AND t3.`id`=t2.`p_id`
+        AND t1.`r_id`=#{roleId}
+    </select>
+
+    <!--修改权限之前删除用户拥有的权限-->
+    <delete id="deleteTreeRoleRealtion" parameterType="Integer">
+        delete from
+        role_power where r_id=#{roleId}
+    </delete>
+
+    <!--修改用户的权限（其实是新增）-->
+    <insert id="addTreeRoleRelation" parameterType="java.util.List">
+
+        insert into role_power (r_id,p_id) values
+        <foreach collection="list" item="item" index="index"
+                 separator=",">
+            (#{item.roleId},#{item.prId})
+        </foreach>
+
+    </insert>
+
+    <!--查询树-->
+    <select id="queryTree" resultType="com.jk.bean.ht.Tree">
+        select * from power
+    </select>
 </mapper>

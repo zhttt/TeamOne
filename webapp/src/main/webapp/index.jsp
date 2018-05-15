@@ -40,9 +40,9 @@
 		//在浏览器控制台打印信息
 		//console.info(node)
 		//var id=${sessionScope.user.id}
-			//alert(id)
+		//	alert(id)
 		$('#tree').tree({
-		    url:"<%=request.getContextPath()%>/UserController/getTree",
+		    url:"<%=request.getContextPath()%>/UserController/getTree?id",
 		    method:"post",
           //  data:{"id":id},
 		    onClick:function (node){
